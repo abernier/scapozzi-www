@@ -1,5 +1,3 @@
-@import "jquery.bxslider.css";
-
 fs = 16px
 lh = 1.5
 
@@ -57,6 +55,8 @@ body {
 svg,
 object,
 img {max-width:100%;}
+
+img[src][width] {height:auto;}
 
 a {color:inherit; text-decoration:none;}
 
@@ -213,11 +213,27 @@ section.webdesign {
   .p {margin-bottom:1.5em;line-height:1.2;font-size:90%;color:#666;transforme-text:uppercase;}
   a {display:block;position:relative;}
 
-  .slides {white-space:nowrap; overflow:auto;position:relative;}
-  .slide {display:inline-block;}
+  .slides .img >img {width:100%;}
+
+  .slides {
+    white-space:nowrap; overflow:auto;position:relative;
+    
+    &.carouselscrollview {
+      overflow:hidden;
+      +.shadow .nav-slides {overflow:hidden;}
+    }
+    
+  }
+  .slide {display:inline-block; width:100%;}
+  .slide a {
+    ratiobloc(976/1400);
+  }
+  
+  .slide:not(.active) {opacity:.75;}
 
   .rollover {transition-duration:1s;background:#121013;position:absolute;left:0;right:0;top:0;bottom:0;color:white;z-index:2;opacity:0;}
   .rollover:hover {opacity:.7;transition-duration:1s;}
+  .rollover .subinner {display:block;}
 
   .inner {display:inline-block;text-transform:uppercase;font-weight:bold;font-size:219%;margin:0;line-height:1.2;border-bottom:1px solid #fff;}
   .subinner {margin:0;font-style:italic;}
@@ -269,18 +285,19 @@ section.webdesign {
 
   .nav-slides {
     white-space:nowrap; overflow:auto;
+    
     margin-top:$margin; margin-bottom:@margin-top;
     a {
       display:inline-block;vertical-align:top; width:33.333333%; height:2.6em;
 
       background:#d0d0d0;
-      &.target-from {background:#342e35;}
+      &.active {background:#342e35;}
 
       margin-right:$margin;
       &:first-child {margin-left:$margin;}
     }
     @media (min-width:1024px) {
-      display:none;
+      //display:none;
       a {width:19%;}
     }
 
@@ -414,17 +431,31 @@ section.list {
 
 }
 
+/*
+lightbox
+*/
 
+.lightbox {position:fixed; left:0;right:0;top:0;bottom:0; z-index:99; background:rgba(0,0,0,.8); overflow:auto;}
+.lightbox {text-align:center;}
 
-//  .rollover {
-//	opacity:1;
-//  -o-transition-duration: 1s;
-//  -moz-transition-duration: 1s;
-//  -webkit-transition: -webkit-transform 1s;=
-//  .rollover:hover
-//	-o-transition-duration: 1s;
-//	-moz-transition-duration: 1s;
-//	-webkit-transition: -webkit-transform 1s;
-//	-webkit-box-shadow: 0px 0px 4px #000;
-//	-moz-box-shadow: 0px 0px 4px #000;
-//	box-shadow:0px 0px 4px #000;
+.lightbox {white-space:nowrap;}
+.lightbox * {white-space:normal;white-space:initial;}
+.lightbox:before {content:" "; display:inline-block;vertical-align:middle; height:100%; width:0;}
+.lightbox img {display:inline-block;vertical-align:middle; max-width:100%;/* max-height:100%;*/}
+
+.lightbox nav {position:fixed;bottom:0;right:0;z-index:99; margin:.5em;}
+.lightbox nav a+a {margin-left:.25em;}
+.lightbox .kbd {display:inline-block; background:black; color:white; padding:.5em; border-radius:3px;}
+.lightbox kbd {font-family:inherit; font-size:50%; vertical-align:middle;}
+.lightbox kbd:before {content:"(";}
+.lightbox kbd:after {content:")";}
+.lightbox a {text-decoration:none; opacity:.5;}
+.lightbox a:hover,
+.lightbox a:active,
+.lightbox a.active {opacity:1;}
+.lightbox a.disabled {opacity:0.2; cursor:not-allowed;}
+.lightbox .close {position:fixed;left:0;top:0;z-index:99; margin:.5em;}
+.lightbox .demo {position:fixed;right:0;top:0;z-index:99; margin:.5em; background:#FEEF70; color:black; opacity:.8; text-align:left; max-width:60%;}
+.lightbox .demo:after {content:attr(href); display:block; font-size:50%; text-overflow: ellipsis;overflow:hidden;}
+.lightbox .demo:hover:after {max-width:99em;}
+.lightbox .meter {position:fixed;top:0;left:0;z-index:99; width:0%; height:3px; background:#FEEF70;}

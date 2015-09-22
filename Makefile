@@ -17,7 +17,7 @@ deploy: build serenacapozzi.github.io
 	cd ..
 
 serenacapozzi.github.io:
-	git submodule update --init
+	git clone git@github.com:serenacapozzi/serenacapozzi.github.io.git
 
 package.json:
 	npm init

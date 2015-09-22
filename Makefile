@@ -25,9 +25,9 @@ public/index.html:
 	mkdir -p $(@D)
 	cp tpl/index.html $@
 
-public/index.css: ./node_modules/.bin/stylus styles/index.styl
+public/index.css: ./node_modules/stylus/bin/stylus styles/index.styl
 	mkdir -p $(@D)
-	./node_modules/.bin/stylus -o $@ styles/index.styl 
+	./node_modules/stylus/bin/stylus -o $@ styles/index.styl
 
 $(ICONFONTCSS): .FORCE
 	$(MAKE) FONTNAME=$(PROJECT) -C $(ICONFONTPATH)

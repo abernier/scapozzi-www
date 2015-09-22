@@ -7,7 +7,17 @@ ICONFONT = $(PROJECT)iconfont
 ICONFONTPATH = public/fonts/$(PROJECT)iconfont/
 ICONFONTCSS = $(ICONFONTPATH)/$(ICONFONT).css
 
-all: package.json $(ICONFONTPATH) public/index.html public/index.css $(ICONFONTCSS) public/vendor
+.PHONY: build
+build: package.json $(ICONFONTPATH) public/index.html public/index.css $(ICONFONTCSS) public/vendor
+
+.PHONY: deploy
+deploy: build serenacapozzi.github.io
+	cp -Rf public/* serenacapozzi.github.io
+	cd serenacapozzi.github.io && git add -A && git commit -m "new version" && git push origin master
+	cd ..
+
+serenacapozzi.github.io:
+	git submodule update --init
 
 package.json:
 	npm init
@@ -41,9 +51,11 @@ node_modules ./node_modules/%:
 
 .FORCE:
 
+.PHONY: clean
 clean:
-	-rm -Rf fonts public styles package.json node_modules
+	-rm -Rf fonts public styles package.json node_modules serenacapozzi.github.io
 
+.PHONY: debug
 debug:
 	echo $(PROJECT)
 	echo $(ICONFONTPATH)

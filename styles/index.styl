@@ -160,8 +160,12 @@ section.head {
 
   .avatar {
     width:5em;
-    border-radius:100%; border:.12em solid #999;
+    border-radius:100%; border:.1em solid #999;
   }
+  .icon {color:#333; font-size:700%;}
+  .serena:before {content:"\f101";}
+  
+
   .typo{font-size:3em; margin:0; color:#666; font-family:"savoyeregular";}
   .h1 {margin-top:0.5em; margin-bottom:0.2em; font-family:"roboto_slablight";}
   .h2 {margin-top:0; margin-bottom:0.2em; font-family:"roboto_slablight";}
@@ -198,7 +202,6 @@ section.head {
     .avatar +* {display:inline-block;vertical-align:middle;}
 
     .avatar {margin-right:1em;}
-
 
     }
 }
@@ -362,7 +365,7 @@ section.experiments {
     .item {display:block;width:100%;}
   }
   @media (min-device-width:768px) {
-    .item {display:inline-block;width:50%;}
+    .item {display:inline-block;width:50%; vertical-align:top;}
   }
   @media (min-device-width:1024px) {
     .item {display:inline-block;width:25%;}
